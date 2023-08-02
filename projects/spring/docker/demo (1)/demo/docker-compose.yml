@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  my_spring_app:
+    build:
+      context: .   # Path to your Spring app Dockerfile directory
+    ports:
+      - "8080:8080"   # Expose Spring app port 8080 to the host
+    networks:
+      - my_network
+    container_name: "spring"
+    depends_on:
+      - my_mongo   # Depend on the my_mongo service to start first
+
+  my_mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root   # MongoDB root user
+      MONGO_INITDB_ROOT_PASSWORD: root   # MongoDB root password
+    networks:
+      - my_network
+    container_name: "mongo"
+    ports:
+      - "27017:27017"   # Expose Spring app port 8080 to the host
+
+networks:
+  my_network:
+    driver: bridge
