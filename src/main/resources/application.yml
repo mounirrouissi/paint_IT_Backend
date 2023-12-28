@@ -57,3 +57,6 @@ oauth:
       - http://localhost:5173/oauth2/redirect
       - myandroidapp://oauth2/redirect
       - myiosapp://oauth2/redirect
+
+
+#stripe key:sk_test_51OS0YSLjRm5KgpNdyF9LnTQ2OmittinKQt4DP9MfFrIFK4gBvuW2TY4COSgCOuIEaGL5D8s7XWzfCvKTk3kP57zf00KDibU1RU
