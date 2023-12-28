@@ -1,6 +1,8 @@
 package com.example.springsocial.controller;
 import com.example.springsocial.payment.PlanDAO;
 import com.example.springsocial.payment.RequestDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
@@ -26,7 +28,7 @@ public class PaymentController {
     String STRIPE_API_KEY = System.getenv().get("sk_test_51OS0YSLjRm5KgpNdyF9LnTQ2OmittinKQt4DP9MfFrIFK4gBvuW2TY4COSgCOuIEaGL5D8s7XWzfCvKTk3kP57zf00KDibU1RU");
 
     @PostMapping("/checkout/hosted")
-    String hostedCheckout(@RequestBody RequestDTO requestDTO) throws StripeException {
+    String hostedCheckout(@RequestBody RequestDTO requestDTO) throws StripeException, JsonProcessingException {
         Stripe.apiKey = STRIPE_API_KEY;
         String clientBaseURL = "http://localhost:5173";
 
@@ -38,7 +40,7 @@ public class PaymentController {
         String yearlyPriceId = "price_1OSLcuLjRm5KgpNdxKhiJoxS"; // replace with your actual price ID for the yearly plan
 
         // Choose the price ID based on the index in the request
-        String priceId = requestDTO.index() == 0 ? monthlyPriceId : yearlyPriceId;
+        String priceId = requestDTO.index() == 1 ? monthlyPriceId : yearlyPriceId;
 
         // Next, create a checkout session by adding the details of the checkout
         SessionCreateParams params = SessionCreateParams.builder()
@@ -54,8 +56,21 @@ public class PaymentController {
 
         Session session = Session.create(params);
 
-        return session.getUrl();
+//        return session.getUrl();
+        // Create a map to hold the response data
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("status", "success");
+        responseData.put("url", session.getUrl());
+
+// Convert the map to a JSON string
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonResponse = mapper.writeValueAsString(responseData);
+
+        return jsonResponse;
+
     }
+
+
 
 
     public static Customer findOrCreateCustomer(String email, String name) throws StripeException {

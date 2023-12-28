@@ -88,7 +88,7 @@ public class SecurityConfig {
 						.failureHandler(oAuth2AuthenticationFailureHandler))
 				.authorizeHttpRequests(authorize -> authorize
 						.requestMatchers(
-								"/auth/**",
+								"/auth/**","/checkout/**",
 								"/v3/api-docs/**",
 								"/swagger-ui/**",
 								"/swagger-ui.html",
