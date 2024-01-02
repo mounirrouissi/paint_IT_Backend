@@ -60,3 +60,6 @@ oauth:
 
 
 #stripe key:sk_test_51OS0YSLjRm5KgpNdyF9LnTQ2OmittinKQt4DP9MfFrIFK4gBvuW2TY4COSgCOuIEaGL5D8s7XWzfCvKTk3kP57zf00KDibU1RU
+
+stripe:
+  secretKey: ${stripe.secretKey}

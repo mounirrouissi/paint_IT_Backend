@@ -51,9 +51,10 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.0</version>
-			<optional>true</optional>
+			<version>1.18.30</version> <!-- Updated version -->
+			<scope>provided</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -95,8 +96,9 @@
 		<dependency>
 			<groupId>com.stripe</groupId>
 			<artifactId>stripe-java</artifactId>
-			<version>22.13.0</version>
+			<version>24.10.0-beta.1</version> <!-- Updated version -->
 		</dependency>
+
 	</dependencies>
 
 	<build>

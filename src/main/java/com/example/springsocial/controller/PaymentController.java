@@ -11,6 +11,7 @@ import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionCreateParams.LineItem.PriceData;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,10 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class PaymentController {
 
-    String STRIPE_API_KEY = System.getenv().get("sk_test_51OS0YSLjRm5KgpNdyF9LnTQ2OmittinKQt4DP9MfFrIFK4gBvuW2TY4COSgCOuIEaGL5D8s7XWzfCvKTk3kP57zf00KDibU1RU");
+    @Value("${stripe.secretKey}")
+    private String STRIPE_API_KEY;
+
+
 
     @PostMapping("/checkout/hosted")
     String hostedCheckout(@RequestBody RequestDTO requestDTO) throws StripeException, JsonProcessingException {
